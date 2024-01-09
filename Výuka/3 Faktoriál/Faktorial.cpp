@@ -8,6 +8,6 @@ int faktorial(int cislo){
 }
 
 int main(){
-    cout<<faktorial(4)<<endl;
+    cout<<faktorial(5)<<endl;
     return 0;
 }
