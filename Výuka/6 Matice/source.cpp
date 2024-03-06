@@ -1,5 +1,5 @@
 #include <iostream>
-#include <stdlib.h>
+#include <cstdlib>
 #include <vector>
 
 using namespace std;
@@ -56,9 +56,9 @@ vector<vector<int>> NasobeniMatic(const vector<vector<int>>& Matrix1, const vect
 
 int main(){
     int rows, columns;
-    cout << "Zadejte pocet radku matic: ";
+    cout << "Zadejte pocet radku matice 1: ";
     cin >> rows;
-    cout << "Zadejte pocet sloupcu matic: ";
+    cout << "Zadejte pocet sloupcu matice 1: ";
     cin >> columns;
 
     vector<vector<int>> Matrix1 = IniciaceMatice(rows, columns);
@@ -66,29 +66,39 @@ int main(){
 
     cout << "\n";
 
+    cout << "Zadejte pocet radku matice 2: ";
+    cin >> rows;
+    cout << "Zadejte pocet sloupcu matice 2: ";
+    cin >> columns;
+
     vector<vector<int>> Matrix2 = IniciaceMatice(rows, columns);
     VypisMatice(Matrix2);
 
     cout << "\n";
-    VypisMatice(SoucetMatic(Matrix1, Matrix2));
+    if (Matrix1.size() == Matrix2.size() && Matrix1[0].size() == Matrix2[0].size()) {
+        VypisMatice(SoucetMatic(Matrix1, Matrix2));
+    } else {
+        cout << "Rozdilne velikosti, nelze secist";
+    }
 
     cout << "\n";
-    VypisMatice(RozdilMatic(Matrix1, Matrix2));
-    
+    if (Matrix1.size() == Matrix2.size() && Matrix1[0].size() == Matrix2[0].size()) {
+        VypisMatice(RozdilMatic(Matrix1, Matrix2));
+    } else {
+        cout << "Rozdilne velikosti, nelze odecist";
+    }
+
     cout << "\n";
     VypisMatice(NasobeniMatic(Matrix1, Matrix2));
     return 0;
 }
 
 vector<vector<int>> NasobeniMatic(const vector<vector<int>>& Matrix1, const vector<vector<int>>& Matrix2){
-    int rows = Matrix1.size();
-    int columns = Matrix1[0].size();
+    vector<vector<int>> Result(Matrix1.size(), vector<int>(Matrix2[0].size()));
 
-    vector<vector<int>> Result(rows, vector<int>(columns));
-
-    for (int row = 0; row < rows; ++row) {
-        for (int column = 0; column < columns; ++column) {
-            for (int k = 0; k < rows; k++){
+    for (int row = 0; row < Matrix1.size(); ++row) {
+        for (int column = 0; column < Matrix2[0].size(); ++column) {
+            for (int k = 0; k < Matrix1[0].size(); k++){
                 Result[row][column] += Matrix1[row][k] * Matrix2[k][column];
             }
         }
