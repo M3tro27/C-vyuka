@@ -44,8 +44,10 @@ int main(){
     list.print_node(2);
     list.print_list();
     cout << endl;
-    list[3];
+    
+    cout << "Operator [3]: " << list[3] << endl;
     cout << endl;
+
     list.print_list();
     cout << endl;
     list.del_node(2);
@@ -116,7 +118,7 @@ Node *LinkedList::operator[](int index) {
         temp = temp->next;
         i++;
     }
-    cout << "Link: " << temp->next << endl;
+    return temp->next;
 }
 
 void LinkedList::del_node(int index) {
